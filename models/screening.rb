@@ -41,11 +41,16 @@ class Screening
       values = [@film_id, @start_time, @empty_seats, @id]
       SqlRunner.run(sql, values)
     end
-
+    
     def self.all()
       sql = "SELECT * FROM screenings"
       screening_data = SqlRunner.run(sql)
       return Screening.map_items(screening_data)
+    end
+
+    def self.delete_all()
+      sql = "DELETE FROM screenings"
+      SqlRunner.run(sql)
     end
 
   end

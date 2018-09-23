@@ -31,18 +31,24 @@ class Ticket
     SET
     (
       customer_id, screening_id
-    ) =
-    (
-      $1, $2
-    )
-    WHERE id = $3"
-    values = [@customer_id, @screening_id, @id]
-    SqlRunner.run(sql, values)
-  end
+      ) =
+      (
+        $1, $2
+      )
+      WHERE id = $3"
+      values = [@customer_id, @screening_id, @id]
+      SqlRunner.run(sql, values)
+    end
 
-  def self.all()
+    def self.all()
       sql = "SELECT * FROM tickets"
       ticket_data = SqlRunner.run(sql)
       return Ticket.map_items(ticket_data)
     end
+
+    def self.delete_all()
+      sql = "DELETE FROM tickets"
+      SqlRunner.run(sql)
+    end
+
 end
