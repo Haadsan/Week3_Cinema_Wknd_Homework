@@ -27,3 +27,17 @@ class Screening
       screening = SqlRunner.run(sql, values).first
       @id = screening['id'].to_i
     end
+
+    def update()
+        sql = "UPDATE screenings
+        SET
+        (
+          film_id, start_time, empty_seats
+        ) =
+        (
+          $1, $2, $3
+        )
+        WHERE id = $4"
+        values = [@film_id, @start_time, @empty_seats, @id]
+        SqlRunner.run(sql, values)
+      end
