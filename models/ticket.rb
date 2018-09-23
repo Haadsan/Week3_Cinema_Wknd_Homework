@@ -40,4 +40,9 @@ class Ticket
     SqlRunner.run(sql, values)
   end
 
+  def self.all()
+      sql = "SELECT * FROM tickets"
+      ticket_data = SqlRunner.run(sql)
+      return Ticket.map_items(ticket_data)
+    end
 end

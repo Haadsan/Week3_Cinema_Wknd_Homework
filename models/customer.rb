@@ -13,34 +13,39 @@ class Customer
 
 
   def save()
-      sql = "INSERT INTO customers
-      (
-        name,
-        funds
-      )
-      VALUES
+    sql = "INSERT INTO customers
+    (
+      name,
+      funds
+    )
+    VALUES
+    (
+      $1, $2
+    )
+    RETURNING *"
+    values = [@name, @funds]
+    customer = SqlRunner.run(sql, values).first
+    @id = customer['id'].to_i
+  end
+
+  def update()
+    sql = "UPDATE customers
+    SET
+    (
+      name, funds
+      ) =
       (
         $1, $2
       )
-      RETURNING *"
-      values = [@name, @funds]
-      customer = SqlRunner.run(sql, values).first
-      @id = customer['id'].to_i
+      WHERE id = $3"
+      values = [@name, @funds, @id]
+      SqlRunner.run(sql, values)
     end
 
-    def update()
-        sql = "UPDATE customers
-        SET
-        (
-          name, funds
-        ) =
-        (
-          $1, $2
-        )
-        WHERE id = $3"
-        values = [@name, @funds, @id]
-        SqlRunner.run(sql, values)
-      end
+    def self.all()
+      sql = "SELECT * FROM customers"
+      customer_data = SqlRunner.run(sql)
+      return Customer.map_items(customer_data)
+    end
 
-
-end
+  end

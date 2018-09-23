@@ -32,13 +32,20 @@ class Film
     SET
     (
       title, price
-    ) =
-    (
-      $1, $2
-    )
-    WHERE id = $3"
-    values = [@title, @price, @id]
-    SqlRunner.run(sql, values)
-  end
+      ) =
+      (
+        $1, $2
+      )
+      WHERE id = $3"
+      values = [@title, @price, @id]
+      SqlRunner.run(sql, values)
+    end
 
-end
+    def self.all()
+      sql = "SELECT * FROM films"
+      film_data = SqlRunner.run(sql)
+      return Film.map_items(film_data)
+    end
+
+
+  end
