@@ -40,3 +40,5 @@ class Film
     values = [@title, @price, @id]
     SqlRunner.run(sql, values)
   end
+
+end

@@ -41,3 +41,6 @@ class Screening
         values = [@film_id, @start_time, @empty_seats, @id]
         SqlRunner.run(sql, values)
       end
+
+
+end
