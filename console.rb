@@ -1,7 +1,6 @@
 require_relative('models/ticket')
 require_relative('models/customer')
 require_relative('models/film' )
-require_relative('models/screening')
 require('pry-byebug')
 
 
@@ -24,31 +23,22 @@ film3.save
 film4 = Film.new({'title' => 'A Simple Favor ', 'price' => 12.00})
 film4.save
 
-# ticket1 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film1.id})
-# ticket1.save
-# ticket2 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film2.id})
-# ticket2.save
-# ticket3 = Ticket.new({'customer_id' => customer2.id, 'film_id' => film2.id})
-# ticket3.save
-# ticket4 = Ticket.new({'customer_id' => customer3.id, 'film_id' => film2.id})
-# ticket4.save
-# ticket5 = Ticket.new({'customer_id' => customer3.id, 'film_id' => film3.id})
-# ticket5.save
-# ticket6 = Ticket.new({'customer_id' => customer3.id, 'film_id' => film4.id})
-# ticket6.save
-# ticket7 = Ticket.new({'customer_id' => customer4.id, 'film_id' => film4.id})
-# ticket7.save
+ticket1 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film1.id})
+ticket1.save
+ticket2 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film2.id})
+ticket2.save
+ticket3 = Ticket.new({'customer_id' => customer2.id, 'film_id' => film2.id})
+ticket3.save
+ticket4 = Ticket.new({'customer_id' => customer3.id, 'film_id' => film2.id})
+ticket4.save
+ticket5 = Ticket.new({'customer_id' => customer3.id, 'film_id' => film3.id})
+ticket5.save
+ticket6 = Ticket.new({'customer_id' => customer3.id, 'film_id' => film4.id})
+ticket6.save
+ticket7 = Ticket.new({'customer_id' => customer4.id, 'film_id' => film4.id})
+ticket7.save
 
-screening1 = Screening.new({'film_id' => film1.id, 'start_time' => '2018-09-19 15:00:00', 'empty_seats' => 20})
-screening1.save
-screening2 = Screening.new({'film_id' => film2.id, 'start_time' => '2018-09-20 12:00:00', 'empty_seats' => 15})
-screening2.save
-screening3 = Screening.new({'film_id' => film3.id, 'start_time' => '2018-09-21 18:00:00', 'empty_seats' => 1})
-screening3.save
-screening4 = Screening.new({'film_id' => film4.id, 'start_time' => '2018-09-22 17:00:00', 'empty_seats' => 20})
-screening4.save
-screening5 = Screening.new({'film_id' => film4.id, 'start_time' => '2018-09-23 20:00:00', 'empty_seats' => 10})
-screening5.save
+
 
 binding.pry
 nil

@@ -11,6 +11,18 @@ class Customer
     @funds = options['funds'].to_f
   end
 
+# Show which films a customer has booked to see
+  def films()
+      sql = "SELECT films.*
+      FROM films
+      INNER JOIN tickets
+      ON tickets.film_id = films.id
+      WHERE tickets.customer_id = $1"
+      values = [@id]
+      film_data = SqlRunner.run(sql, values)
+      return Film.map_items(film_data)
+    end
+
 
   def save()
     sql = "INSERT INTO customers
@@ -28,6 +40,9 @@ class Customer
     @id = customer['id'].to_i
   end
 
+
+
+
   def update()
     sql = "UPDATE customers
     SET
@@ -42,10 +57,13 @@ class Customer
       SqlRunner.run(sql, values)
     end
 
+    
+
     def self.all()
       sql = "SELECT * FROM customers"
       customer_data = SqlRunner.run(sql)
-      return Customer.map_items(customer_data)
+      result = customers.map{|customer| Customer.new(customer_data)}
+      return result
     end
 
     def self.delete_all()

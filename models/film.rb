@@ -3,13 +3,28 @@ require_relative('../db/sql_runner')
 class Film
 
   attr_reader :id
-  attr_accessor :title, :price, :empty_seats
+  attr_accessor :title, :price
 
   def initialize(options)
     @id = options['id'].to_i
     @title = options['title']
     @price = options['price'].to_f
   end
+
+  # which customers are coming to see one film
+  def customers()
+    sql = "SELECT customers.*
+    FROM customers
+    INNER JOIN tickets
+    ON tickets.customer_id = customers.id
+    WHERE tickets.film_id = $1"
+    values = [@id]
+    customer_data = SqlRunner.run(sql, values)
+    customers = Customer.map_items(customer_data)
+    return customers
+  end
+
+
 
   def save()
     sql = "INSERT INTO films
@@ -44,7 +59,8 @@ class Film
     def self.all()
       sql = "SELECT * FROM films"
       film_data = SqlRunner.run(sql)
-      return Film.map_items(film_data)
+      result = films.map{|film| Film.new(film_data)}
+      return result
     end
 
     def self.delete_all()
