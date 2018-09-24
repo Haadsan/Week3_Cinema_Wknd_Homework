@@ -1,3 +1,5 @@
+# https://gist.github.com/futuresocks/e896f5d72059d6291d564aba6fd01207
+
 require_relative('models/ticket')
 require_relative('models/customer')
 require_relative('models/film' )
@@ -39,6 +41,16 @@ ticket7 = Ticket.new({'customer_id' => customer4.id, 'film_id' => film4.id})
 ticket7.save
 
 
+# screening1 = Screening.new({'film_id' => film1.id, 'start_time' => '2018-09-19 15:00:00', 'empty_seats' => 20})
+# screening1.save
+# screening2 = Screening.new({'film_id' => film2.id, 'start_time' => '2018-09-20 12:00:00', 'empty_seats' => 15})
+# screening2.save
+# screening3 = Screening.new({'film_id' => film3.id, 'start_time' => '2018-09-21 18:00:00', 'empty_seats' => 1})
+# screening3.save
+# screening4 = Screening.new({'film_id' => film4.id, 'start_time' => '2018-09-22 17:00:00', 'empty_seats' => 20})
+# screening4.save
+# screening5 = Screening.new({'film_id' => film4.id, 'start_time' => '2018-09-23 20:00:00', 'empty_seats' =
+# screening5.save
 
 binding.pry
 nil

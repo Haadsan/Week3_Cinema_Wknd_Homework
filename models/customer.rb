@@ -1,3 +1,4 @@
+# https://gist.github.com/futuresocks/e896f5d72059d6291d564aba6fd01207
 require_relative('../db/sql_runner')
 
 class Customer
@@ -12,6 +13,21 @@ class Customer
   end
 
 # Show which films a customer has booked to see
+# customer1.films
+
+# when to check film id ...2
+
+# SELECT films.*
+# FROM films
+# INNER JOIN tickets
+# ON tickets.film_id = films.id
+# WHERE tickets.customer_id = 2;
+#
+# id |      title      | price
+# ----+-----------------+-------
+#   2 | King of Thieves |   9.0
+#
+
   def films()
       sql = "SELECT films.*
       FROM films
@@ -20,7 +36,8 @@ class Customer
       WHERE tickets.customer_id = $1"
       values = [@id]
       film_data = SqlRunner.run(sql, values)
-      return Film.map_items(film_data)
+      films = film_data.map{|film| Film.new(film)}
+      return films
     end
 
 
@@ -40,9 +57,6 @@ class Customer
     @id = customer['id'].to_i
   end
 
-
-
-
   def update()
     sql = "UPDATE customers
     SET
@@ -57,7 +71,7 @@ class Customer
       SqlRunner.run(sql, values)
     end
 
-    
+
 
     def self.all()
       sql = "SELECT * FROM customers"
